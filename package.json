@@ -1,0 +1,16 @@
+{
+  "name": "application-express",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "author": "Gatien",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "youtube-mp3-downloader": "^0.7.8",
+    "yt-search": "^2.10.2"
+  }
+}
