@@ -67,7 +67,6 @@ app.post('/dl', async (req, res) => {
         let path = video.title.replace(/[|"<>?]/g, "")
         path = path.trim()
         res.download(`${__dirname}/musique/${path}.mp3`)
-        res.end()
     })
 
 })
