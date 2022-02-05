@@ -64,7 +64,10 @@ app.post('/dl', async (req, res) => {
 
     YD.on('finished', () => {
         console.log('[REQUETE] : fin du téléchargement !')
-        res.download(`${__dirname}/musique/${video.title}.mp3`)
+        let path = video.title.replace(/[|"<>?]/g, "")
+        path = path.trim()
+        res.download(`${__dirname}/musique/${path}.mp3`)
+        res.end()
     })
 
 })
