@@ -44,17 +44,26 @@ app.listen(80, () => {
 })
 
 app.post('/dl', async (req, res) => {
-    console.log(`[REQUETE] : ${req.body.nom}`)
+
+    if(!req.headers['user-agent']){
+        res.send('error : no user agent given')
+    }
+
+    console.log(`[REQUETE] : ${req.body.nom}\n[IP] : ${req.hostname}\n[PLATEFORME] : ${req.headers['user-agent']}`)
 
     const video = await VideoFinder(req.body.nom)
 
     const id_video = video.url.split('?v=')[1]
 
+    if(video.duration.seconds>360){ // vérifie que la vidéo ne fais pas plus de 6 min.
+        res.send('erreur : vidéo trop longue')
+        return
+    }
+
     YD.download(id_video)
 
     YD.on('finished', () => {
         console.log('[REQUETE] : fin du téléchargement !')
-
         res.download(`${__dirname}/musique/${video.title}.mp3`)
     })
 
