@@ -2,6 +2,18 @@ const express = require('express')
 const ytsearch = require('yt-search')
 const youtubemp3downloader = require('youtube-mp3-downloader')
 const fs = require('fs')
+const path = require('path')
+
+
+// vide le dossier musique
+fs.readdir('musique', (err, files) => {
+    if (err) throw err
+    for (const file of files) {
+      fs.unlink(path.join('musique', file), err => {
+        if (err) throw err;
+    })
+   }
+})
 
 const app = express()
 
